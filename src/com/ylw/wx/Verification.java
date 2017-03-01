@@ -29,7 +29,13 @@ public class Verification extends HttpServlet {
         list.add(timestamp);
         list.add(Util.token);
         Collections.sort(list);
-        log.info("aftersort" + list.get(0) + list.get(1) + list.get(2));
-
+        String afterSort = list.get(0) + list.get(1) + list.get(2);
+        log.info("aftersort: " + list.get(0) + list.get(1) + list.get(2));
+        String afterSHA = SHA1.getSha1(afterSort);
+        log.info("agterSHA:" + afterSHA);
+        if (afterSHA.equals(signature)) {
+            log.info("afterSHA is equals signature" + afterSHA + "  " + signature);
+            resp.getWriter().println(echostr);
+        } else resp.getWriter().print("error");
     }
 }
