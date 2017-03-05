@@ -1,7 +1,6 @@
 package com.ylw.wx;
 
 import com.sun.istack.internal.logging.Logger;
-import com.ylw.wx.com.ylw.wx.Util;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,13 +9,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-
-/**
+//
+//
+/**验证来自微信服务端的消息
  * Created by 85243 on 2017/2/28.
  */
 public class Verification extends HttpServlet {
     static Logger log = Logger.getLogger(Verification.class);
 
+    /**
+     *来自微信消息的验证！
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String signature = req.getParameter("signature");
@@ -37,5 +44,14 @@ public class Verification extends HttpServlet {
             log.info("afterSHA is equals signature" + afterSHA + "  " + signature);
             resp.getWriter().println(echostr);
         } else resp.getWriter().print("error");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("utf-8");
+        String result = CoreService.deal(req);
+        log.info("result is :" +result);
+        resp.getWriter().print(result);
     }
 }

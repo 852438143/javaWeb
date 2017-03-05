@@ -4,6 +4,21 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
     <servlet>
+        <servlet-name>initServlet</servlet-name>
+        <servlet-class>com.ylw.wx.https.Token</servlet-class>
+        <init-param>
+
+            <param-name>appid</param-name>
+            <param-value>wx03a5a328762bf67f</param-value>
+        </init-param>
+        <init-param>
+            <param-name>appsecret</param-name>
+            <param-value>b2124f07a5d47ad34b59254018b9bb52</param-value>
+        </init-param>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+
+    <servlet>
         <servlet-name>Verification</servlet-name>
         <servlet-class>com.ylw.wx.Verification</servlet-class>
     </servlet>
@@ -11,4 +26,15 @@
         <servlet-name>Verification</servlet-name>
         <url-pattern>/verification</url-pattern>
     </servlet-mapping>
+    <!--
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>securedapp</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    -->
 </web-app>
